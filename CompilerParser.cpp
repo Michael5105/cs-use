@@ -465,7 +465,7 @@ void CompilerParser::next(){
  * @return the Token
  */
 Token* CompilerParser::current(){
-    std::list<Token*>::iterator trees =this -> token.begin();
+    std::list<Token*>::iterator trees =this -> tokens.begin();
     advance(trees,tokenIndex);
 
     return *trees;
@@ -476,7 +476,7 @@ Token* CompilerParser::current(){
  * @return true if a match, false otherwise
  */
 bool CompilerParser::have(std::string expectedType, std::string expectedValue){
-    if(current()->getValue() == expectedValue && current()->getType == expectedType){
+    if(current()->getValue() == expectedValue && current() ->getType() == expectedType){
         return true;
     }
 
@@ -489,7 +489,7 @@ bool CompilerParser::have(std::string expectedType, std::string expectedValue){
  * @return the current token before advancing
  */
 Token* CompilerParser::mustBe(std::string expectedType, std::string expectedValue){
-    if(current()->getValue() == expectedValue && current()->getType == expectedType){
+    if(current()->getValue() == expectedValue && current()->getType()== expectedType){
         return current();
     }else{
         throw ParseException();
